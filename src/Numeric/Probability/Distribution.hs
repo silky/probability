@@ -357,7 +357,11 @@ above p (Cons d) =
           (Other, Fold.sum d2) :
           List.map (mapFst Case) (Map.toAscList d1)
 
+
+{-@ type Prob a = {v:a | 0.0 <= v && v <= 1.0} @-}
+
 fromFreqs :: (Fractional prob) => [(a,prob)] -> T prob a
+{-@ fromFreqs :: (Fractional prob) => [(a,Prob prob)] -> T (Prob prob) a @-}
 fromFreqs xs = Cons (List.map (\(x,p)->(x,p/q)) xs)
            where q = sumP xs
 
